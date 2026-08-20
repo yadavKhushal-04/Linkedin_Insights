@@ -9,9 +9,11 @@ h11==0.16.0
 idna==3.19
 Mako==1.4.1
 MarkupSafe==3.0.3
+playwright==1.62.0
 pydantic==2.13.4
 pydantic-settings==2.15.0
 pydantic_core==2.46.4
+pyee==13.0.1
 PyMySQL==1.2.0
 python-dotenv==1.2.3
 SQLAlchemy==2.0.52
