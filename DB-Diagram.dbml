@@ -1,0 +1,62 @@
+Table pages {
+  id int [pk, increment]
+  linkedin_id varchar(255)
+  page_id varchar(255) [unique, not null]
+  page_name varchar(150) [not null]
+  url varchar(500)
+  profile_pic_url varchar(500)
+  description text
+  website varchar(255)
+  industry varchar(255)
+  follower_count int [default: 0]
+  headcount int
+  specialities text
+  last_scraped_at datetime
+  created_at datetime [default: `now()`]
+  updated_at datetime [default: `now()`]
+
+  indexes {
+    (page_name)
+    (page_id)
+    (industry)
+  }
+}
+
+Table posts {
+  id int [pk, increment]
+  page_id int [not null]
+  content text
+  post_url varchar(500)
+  likes_count int [default: 0]
+  posted_at datetime
+}
+
+Table comments {
+  id int [pk, increment]
+  post_id int [not null]
+  author_name varchar(255)
+  content text
+  commented_at datetime
+}
+
+Table people {
+  id int [pk, increment]
+  linkedin_id varchar(255)
+  name varchar(255) [not null]
+  profile_url varchar(500)
+  headline varchar(500)
+}
+
+Table page_employees {
+  page_id int [not null]
+  person_id int [not null]
+
+  indexes {
+    (page_id, person_id) [pk]
+  }
+}
+
+Ref: pages.id < posts.page_id
+Ref: posts.id < comments.post_id
+Ref: pages.id < page_employees.page_id
+Ref: people.id < page_employees.person_id
