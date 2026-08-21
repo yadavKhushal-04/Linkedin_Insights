@@ -1,0 +1,657 @@
+{
+  "info": {
+    "_postman_id": "943de759-bced-41f5-b5e7-74d1bdec80a8",
+    "name": "Linkedin_Insights Microservice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46554730"
+  },
+  "item": [
+    {
+      "name": "pages",
+      "item": [
+        {
+          "name": "{page_id}",
+          "item": [
+            {
+              "name": "posts",
+              "item": [
+                {
+                  "name": "Get Page Posts",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pages/:page_id/posts?skip=0&limit=15",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pages",
+                        ":page_id",
+                        "posts"
+                      ],
+                      "query": [
+                        {
+                          "key": "skip",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "15"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "page_id",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pages/:page_id/posts?skip=0&limit=15",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pages",
+                            ":page_id",
+                            "posts"
+                          ],
+                          "query": [
+                            {
+                              "key": "skip",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "15"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "page_id",
+                              "value": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"total\": 1155,\n  \"skip\": 2747,\n  \"limit\": 4124,\n  \"results\": [\n    {\n      \"id\": 5315,\n      \"content\": \"string\",\n      \"post_url\": null,\n      \"likes_count\": 8326,\n      \"posted_at\": \"string\"\n    },\n    {\n      \"id\": 8303,\n      \"content\": \"string\",\n      \"post_url\": \"string\",\n      \"likes_count\": 6000,\n      \"posted_at\": \"string\"\n    }\n  ]\n}"
+                    },
+                    {
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pages/:page_id/posts?skip=0&limit=15",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pages",
+                            ":page_id",
+                            "posts"
+                          ],
+                          "query": [
+                            {
+                              "key": "skip",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "15"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "page_id",
+                              "value": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        1196,\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "people",
+              "item": [
+                {
+                  "name": "Get Page People",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pages/:page_id/people?skip=0&limit=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pages",
+                        ":page_id",
+                        "people"
+                      ],
+                      "query": [
+                        {
+                          "key": "skip",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "page_id",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pages/:page_id/people?skip=0&limit=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pages",
+                            ":page_id",
+                            "people"
+                          ],
+                          "query": [
+                            {
+                              "key": "skip",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "page_id",
+                              "value": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"total\": 200,\n  \"skip\": 1323,\n  \"limit\": 5440,\n  \"results\": [\n    {\n      \"id\": 412,\n      \"name\": \"string\",\n      \"profile_url\": null,\n      \"headline\": null\n    },\n    {\n      \"id\": 4660,\n      \"name\": \"string\",\n      \"profile_url\": null,\n      \"headline\": \"string\"\n    }\n  ]\n}"
+                    },
+                    {
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/pages/:page_id/people?skip=0&limit=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "pages",
+                            ":page_id",
+                            "people"
+                          ],
+                          "query": [
+                            {
+                              "key": "skip",
+                              "value": "0"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "page_id",
+                              "value": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        1196,\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get Page",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pages/:page_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pages",
+                    ":page_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "page_id",
+                      "value": "string"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pages/:page_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pages",
+                        ":page_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "page_id",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"id\": 788,\n  \"page_id\": \"string\",\n  \"name\": \"string\",\n  \"url\": null,\n  \"profile_pic_url\": null,\n  \"description\": null,\n  \"website\": \"string\",\n  \"industry\": \"string\",\n  \"follower_count\": 9600,\n  \"headcount\": \"string\",\n  \"specialities\": \"string\",\n  \"created_at\": \"2009-03-06T10:14:55.494Z\"\n}"
+                },
+                {
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/pages/:page_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "pages",
+                        ":page_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "page_id",
+                          "value": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        1196,\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "List Pages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pages?name=string&industry=string&min_followers=7505&max_followers=7505&skip=0&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pages"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "string",
+                  "description": "Search by page name"
+                },
+                {
+                  "key": "industry",
+                  "value": "string",
+                  "description": "Filter by industry"
+                },
+                {
+                  "key": "min_followers",
+                  "value": "7505"
+                },
+                {
+                  "key": "max_followers",
+                  "value": "7505"
+                },
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pages?name=string&industry=string&min_followers=7505&max_followers=7505&skip=0&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Search by page name",
+                      "key": "name",
+                      "value": "string"
+                    },
+                    {
+                      "description": "Filter by industry",
+                      "key": "industry",
+                      "value": "string"
+                    },
+                    {
+                      "key": "min_followers",
+                      "value": "7505"
+                    },
+                    {
+                      "key": "max_followers",
+                      "value": "7505"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"total\": 2549,\n  \"skip\": 6029,\n  \"limit\": 2525,\n  \"results\": [\n    {\n      \"id\": 6497,\n      \"page_id\": \"string\",\n      \"name\": \"string\",\n      \"url\": null,\n      \"profile_pic_url\": null,\n      \"description\": \"string\",\n      \"website\": \"string\",\n      \"industry\": \"string\",\n      \"follower_count\": 4637,\n      \"headcount\": null,\n      \"specialities\": \"string\",\n      \"created_at\": \"1976-10-10T02:15:26.888Z\"\n    },\n    {\n      \"id\": 656,\n      \"page_id\": \"string\",\n      \"name\": \"string\",\n      \"url\": null,\n      \"profile_pic_url\": \"string\",\n      \"description\": null,\n      \"website\": \"string\",\n      \"industry\": \"string\",\n      \"follower_count\": 4935,\n      \"headcount\": null,\n      \"specialities\": \"string\",\n      \"created_at\": \"1989-12-06T09:52:06.535Z\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "Validation Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/pages?name=string&industry=string&min_followers=7505&max_followers=7505&skip=0&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Search by page name",
+                      "key": "name",
+                      "value": "string"
+                    },
+                    {
+                      "description": "Filter by industry",
+                      "key": "industry",
+                      "value": "string"
+                    },
+                    {
+                      "key": "min_followers",
+                      "value": "7505"
+                    },
+                    {
+                      "key": "max_followers",
+                      "value": "7505"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        1196,\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}
