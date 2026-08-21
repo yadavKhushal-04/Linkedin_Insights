@@ -1,6 +1,6 @@
 # LinkedIn Insights Microservice
 
-A backend service that scrapes a given LinkedIn company page and stores its details, posts, comments, and employees in a database, exposing them through a REST API. Built for the Deepsolv SDE Intern assignment.
+A backend service that scrapes a given LinkedIn company page and stores its details, posts, comments, and employees in a database, exposing them through a REST API.
 
 ## What it does
 
@@ -28,7 +28,7 @@ If a page is already in the database, it's served straight from there. If not, i
 app/
   main.py                  # FastAPI app entrypoint
   core/config.py            # env config
-  db/
+  DB/
     session.py               # DB engine, session, Base
     models.py                 # SQLAlchemy models
   scraper/
@@ -54,8 +54,8 @@ postman_collection.json       # exported Postman collection
 ### 2. Clone and set up a virtual environment
 
 ```bash
-git clone <your-repo-url>
-cd Linkedin_Insights
+git clone https://github.com/yadavKhushal-04/Linkedin_Insights
+cd LINKEDIN INSIGHTS
 python -m venv venv
 source venv/bin/activate   # venv\Scripts\activate on Windows
 pip install -r requirements.txt
