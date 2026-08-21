@@ -24,7 +24,7 @@ class Page(Base):
     website = Column(String(255), nullable=True)
     industry = Column(String(255), nullable=True, index=True)
     follower_count = Column(Integer, default=0)
-    headcount = Column(Integer, nullable=True)
+    headcount = Column(String(100), nullable=True)
     specialities = Column(Text, nullable=True)
     last_scraped_at = Column(DateTime, default=datetime.utcnow)
     created_at = Column(DateTime, default=datetime.utcnow)
