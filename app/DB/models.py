@@ -42,7 +42,8 @@ class Post(Base):
     content = Column(Text, nullable=True)
     post_url = Column(String(500), nullable=True)
     likes_count = Column(Integer, default=0)
-    posted_at = Column(DateTime, nullable=True)
+    #linked doesn't provide a timestamp for the post, only a string like 6mo.
+    posted_at = Column(String(20), nullable=True)
 
     page = relationship("Page", back_populates="posts")
     comments = relationship("Comment", back_populates="post", cascade="all, delete-orphan")

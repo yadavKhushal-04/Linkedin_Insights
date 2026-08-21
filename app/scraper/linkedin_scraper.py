@@ -128,6 +128,83 @@ def scrape_page_basic_info(page_id: str):
         return data
 
 
+
+
+def scrape_posts(page_id: str, max_posts: int = 20):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(storage_state=SESSION_FILE)
+        page = context.new_page()
+
+        url = f"https://www.linkedin.com/company/{page_id}/posts/"
+        page.goto(url, timeout=60000)
+        page.wait_for_timeout(4000)
+
+        previous_count = 0
+        for _ in range(10):
+            articles = page.locator('div[role="article"]')
+            current_count = articles.count()
+            if current_count >= max_posts or current_count == previous_count:
+                break
+            previous_count = current_count
+            page.mouse.wheel(0, 3000)
+            page.wait_for_timeout(2000)
+
+        articles = page.locator('div[role="article"]')
+        total = min(articles.count(), max_posts)
+
+        posts = []
+        for i in range(total):
+            article = articles.nth(i)
+
+            more_button = article.locator('button:has-text("more")').first
+            if more_button.count():
+                try:
+                    more_button.click(timeout=2000)
+                    page.wait_for_timeout(300)
+                except Exception:
+                    pass
+
+            content = None
+            text_el = article.locator("span.break-words").first
+            if text_el.count():
+                content = text_el.text_content().strip()
+
+            likes_count = 0
+            likes_el = article.locator("span.social-details-social-counts__reactions-count").first
+            if likes_el.count():
+                likes_text = likes_el.text_content().strip()
+                likes_count = parse_follower_count(likes_text + " followers")
+
+            post_urn = article.get_attribute("data-urn")
+            post_url = f"https://www.linkedin.com/feed/update/{post_urn}" if post_urn else None
+
+
+        posted_at = None
+        time_el = article.locator("span.update-components-actor__sub-description").first
+        if time_el.count():
+            raw_text = time_el.text_content().strip()
+            posted_at = raw_text.split("•")[0].strip()
+
+            posts.append({
+                "content": content,
+                "likes_count": likes_count,
+                "post_url": post_url,
+                "posted_at": posted_at
+            })
+
+
+        browser.close()
+        return posts
+
+
+
+
 if __name__ == "__main__":
-    result = scrape_page_basic_info("google")
-    print(result)
+    # result = scrape_page_basic_info("google")
+    # print(result)
+
+    result = scrape_posts("google", max_posts=2)
+    for p in result:
+            print(p)
+            print("---")
