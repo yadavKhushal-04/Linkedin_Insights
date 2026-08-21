@@ -1,1 +1,0 @@
-# [DB Diagram](https://dbdiagram.io/d/Linkedin_Insights-6a86c294fd15a881e5c16f92)

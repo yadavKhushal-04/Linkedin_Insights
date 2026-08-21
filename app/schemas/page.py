@@ -55,3 +55,22 @@ class PageOut(BaseModel):
 class PageDetailOut(PageOut):
     posts: List[PostOut] = []
     employees: List[PersonOut] = []
+
+class PaginatedPagesOut(BaseModel):
+    total: int
+    skip: int
+    limit: int
+    results: List[PageOut]
+
+class PaginatedPostsOut(BaseModel):
+    total: int
+    skip: int
+    limit: int
+    results: List[PostOut]
+
+
+class PaginatedPeopleOut(BaseModel):
+    total: int
+    skip: int
+    limit: int
+    results: List[PersonOut]
