@@ -179,6 +179,8 @@ def scrape_posts(page_id: str, max_posts: int = 20):
             post_urn = article.get_attribute("data-urn")
             post_url = f"https://www.linkedin.com/feed/update/{post_urn}" if post_urn else None
 
+            comments = scrape_comments(article, page)
+
 
         posted_at = None
         time_el = article.locator("span.update-components-actor__sub-description").first
@@ -186,16 +188,138 @@ def scrape_posts(page_id: str, max_posts: int = 20):
             raw_text = time_el.text_content().strip()
             posted_at = raw_text.split("•")[0].strip()
 
-            posts.append({
-                "content": content,
-                "likes_count": likes_count,
-                "post_url": post_url,
-                "posted_at": posted_at
-            })
 
+        posts.append({
+            "content": content,
+            "likes_count": likes_count,
+            "post_url": post_url,
+            "posted_at": posted_at,
+            "comments": comments,
+        })
 
         browser.close()
         return posts
+
+
+
+
+def scrape_comments(article, page, max_load_more_clicks: int = 2):
+    comments = []
+
+    comment_toggle = article.locator('button[aria-label*="comments on"]').first
+    if not comment_toggle.count():
+        return comments
+
+    try:
+        comment_toggle.click(timeout=3000)
+        page.wait_for_timeout(2500)
+    except Exception:
+        return comments
+
+    for _ in range(max_load_more_clicks):
+        load_more = article.locator('button:has-text("Load more comments")').first
+        if load_more.count():
+            try:
+                load_more.click(timeout=2000)
+                page.wait_for_timeout(1500)
+            except Exception:
+                break
+        else:
+            break
+
+    comment_entities = article.locator("article.comments-comment-entity")
+    total = comment_entities.count()
+
+    for i in range(total):
+        entity = comment_entities.nth(i)
+
+        more_btn = entity.locator('span:has-text("...more")').first
+        if more_btn.count():
+            try:
+                more_btn.click(timeout=1500)
+                page.wait_for_timeout(200)
+            except Exception:
+                pass
+
+        author_name = None
+        author_el = entity.locator("span.comments-comment-meta__description-title").first
+        if author_el.count():
+            author_name = author_el.text_content().strip()
+
+        content = None
+        text_el = entity.locator("span.comments-comment-item__main-content").first
+        if text_el.count():
+            content = text_el.text_content().strip()
+
+        comments.append({
+            "author_name": author_name,
+            "content": content,
+        })
+
+    return comments
+
+
+
+
+def scrape_people(page_id: str, max_people: int = 20):
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(storage_state=SESSION_FILE)
+        page = context.new_page()
+
+        url = f"https://www.linkedin.com/company/{page_id}/people/"
+        page.goto(url, timeout=60000)
+        page.wait_for_timeout(4000)
+
+        previous_count = 0
+        for _ in range(10):
+            cards = page.locator("li.org-people-profile-card__profile-card-spacing")
+            current_count = cards.count()
+            if current_count >= max_people or current_count == previous_count:
+                break
+            previous_count = current_count
+
+            load_more = page.locator("button.scaffold-finite-scroll__load-button").first
+            if load_more.count():
+                try:
+                    load_more.click(timeout=2000)
+                except Exception:
+                    pass
+            page.mouse.wheel(0, 3000)
+            page.wait_for_timeout(2000)
+
+        cards = page.locator("li.org-people-profile-card__profile-card-spacing")
+        total = min(cards.count(), max_people)
+
+        people = []
+        for i in range(total):
+            card = cards.nth(i)
+
+            name = None
+            profile_url = None
+            name_el = card.locator("a.link-without-visited-state").first
+            if name_el.count():
+                aria_label = name_el.get_attribute("aria-label")
+                # if aria_label:
+                #     name = aria_label.replace("View", "").replace("'s profile", "").strip()
+                if aria_label:
+                    name = re.sub(r"^View\s+", "", aria_label)
+                    name = re.sub(r"[’']s profile$", "", name).strip()
+                profile_url = name_el.get_attribute("href")
+
+            title = None
+            title_el = card.locator("div.artdeco-entity-lockup__subtitle").first
+            if title_el.count():
+                title = title_el.text_content().strip()
+
+            people.append({
+                "name": name,
+                "profile_url": profile_url,
+                "title": title,
+            })
+
+        browser.close()
+        return people
 
 
 
@@ -204,7 +328,12 @@ if __name__ == "__main__":
     # result = scrape_page_basic_info("google")
     # print(result)
 
-    result = scrape_posts("google", max_posts=2)
+    # result = scrape_posts("google", max_posts=1)
+    # for p in result:
+    #         print(p)
+    #         print("---")
+
+    result = scrape_people("google", max_people=5)
     for p in result:
-            print(p)
-            print("---")
+        print(p)
+        print("---")
